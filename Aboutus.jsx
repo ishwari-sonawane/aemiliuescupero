@@ -1,8 +1,10 @@
+
 import React from 'react'
 import { BsArrowRightShort } from "react-icons/bs";
 import { SlTrophy } from "react-icons/sl";
 import { GoRocket } from "react-icons/go";
 import A2 from "./assets/A2.webp"
+import A1 from "./assets/A1.webp"
 import A3 from "./assets/A3.webp"
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { IoCall } from "react-icons/io5";
@@ -24,7 +26,9 @@ import { FaBalanceScale } from "react-icons/fa";
 import "./App.css"
 import A10 from"./assets/A10.png"
 import A11 from"./assets/A11.png"
-import Slider from 'react-slick';
+// import Slider from "react-Slick";
+import Slider from "react-slick";
+
 import A13 from './assets/A13.webp';
 import A14 from './assets/A14.webp';
 import A12 from './assets/A12.webp';
@@ -44,6 +48,9 @@ import footer3 from "./assets/footer3.webp"
 import { IoLogoMedium } from "react-icons/io5";
 import { SiLinkedin } from "react-icons/si";
 import { IoLogoYoutube } from "react-icons/io5";
+// import Slider from "react-slick";
+import { useMediaQuery } from 'react-responsive';
+import bgImage from './assets/A1.webp';
 
 
 const About = () =>
@@ -51,7 +58,7 @@ const About = () =>
              
 
    const [hour, setHour] = useState(0);
-
+  // 24 hours
   useEffect(() => {
     let count = 0;
     const interval = setInterval(() => {
@@ -63,7 +70,9 @@ const About = () =>
     }, 100); // Speed of count-up
   }, []);
   
-  const settings = {
+
+// slider
+  const settingss = {
     dots: true,
     infinite: true,
     // speed: 700,
@@ -82,155 +91,335 @@ const About = () =>
     )
   };
 
+
+  const testimonials = [
+  {
+    message: "This is a great service! I’m very happy with it.",
+    name: "John Doe",
+    country: "USA",
+    image: "./path-to-image.jpg",
+  },
+  {
+    message: "Excellent support and delivery!",
+    name: "Jane Smith",
+    country: "UK",
+    image: "./path-to-image.jpg",
+  },
+];
+
+const settings = {
+  dots: true,
+  infinite: true,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  arrows: false,
+  appendDots: dots => (
+    <div className="mt-10 sm:mt-12">
+      <ul className="flex justify-center space-x-2 sm:space-x-7">{dots}</ul>
+    </div>
+  ),
+  customPaging: i => (
+    <div className="w-4 h-1 sm:w-6 bg-gray-300 sm:hover:bg-[#0a1229] sm:mt-8 rounded"></div>
+  ),
+};
+
+
+  const isMobile = useMediaQuery({ maxWidth: 1368 });
    
   return (
 
 
     <div>
 
-           <div className="hidden sm:flex items-center pl-52 sm:h-[7vh] w-full bg-[#1a243f]">
-                  <p className="text-white text-[14px]">WELCOME TO AEMILIUS CUPERO</p>
-                  <div className="hidden  sm:flex items-center gap-8 text-[20px] text-white ml-270 p-8">
-                       <FaMedium  className="group cursor-pointer transition-all duration-300 hover:bg-white hover:text-black"/>
-                       <FaLinkedin className="group cursor-pointer transition-all duration-300 hover:bg-white hover:text-black"/>
-                       <FaYoutube className="group cursor-pointer transition-all duration-300 hover:bg-white hover:text-black" />
-                       <FaPinterest className="group cursor-pointer transition-all duration-300 hover:bg-white hover:text-black"/>
-                  </div>
-                  </div>
-                     <div className="h-[13vh] w-full flex items-star ml-0 mt-0 sm:h-[11vh] sm:ml-0 sm:mt-0">
-        <img src={logo} alt=""  className="h-[43%] ml-4.5 mt-7.5 sm:h-[37%] sm:ml-50 sm:mt-7 "/>
-         <div className="hidden sm:flex items-center justify-end gap-7 ml-165 font-serif tracking-[.10em]">
-        <Link to="/home" className="sm:hover:cursor-pointer sm:hover:text-[#AD9779] sm:hover:border-b-2 sm:hover:border-[#AD9779]">HOME</Link>
-        <Link to="/aboutus"  className="sm:hover:cursor-pointer sm:hover:text-[#AD9779] sm:hover:border-b-2 sm:hover:border-[#AD9779]">ABOUT US</Link>
-        <Link to="/services"  className="sm:hover:cursor-pointer sm:hover:text-[#AD9779] sm:hover:border-b-2 sm:hover:border-[#AD9779]">SERVICES</Link>
-         <Link to="/duediligence"  className="sm:hover:cursor-pointer sm:hover:text-[#AD9779] sm:hover:border-b-2 sm:hover:border-[#AD9779]">DUE DILIGENCE</Link>
-        <Link to="/contact"  className="sm:hover:cursor-pointer sm:hover:text-[#AD9779] sm:hover:border-b-2 sm:hover:border-[#AD9779]">CONTACT US</Link>
-      </div>
-        <div className="lg:flex items-center  sm:h-full sm:bg-[#AD9779] w-[5.3vw] ml-15 ">
-            <CgMenuLeftAlt className="font-thin ml-20 mt-8 text-black sm:text-white text-[45px] sm:ml-7 sm:mt-0"/>
-        </div>
-      </div>
+     
 
+{isMobile ? (
+  // ✅ Mobile layout
+  <div className="flex items-center px-4 py-2 bg-[#1a243f] hidden">
+    <p className="text-white text-sm">WELCOME TO AEMILIUS CUPERO</p>
+    <div className="flex items-center gap-4 text-white text-lg ml-auto">
+      <FaMedium />
+      <FaLinkedin />
+      <FaYoutube />
+      <FaPinterest />
+    </div>
+  </div>
+) : (
+  // ✅ Desktop layout
+  <div className="flex items-center pl-52 h-[7vh] w-full bg-[#1a243f]">
+    <p className="text-white text-[14px]">WELCOME TO AEMILIUS CUPERO</p>
+    <div className="flex items-center gap-8 text-[20px] text-white ml-auto pr-12">
+      <FaMedium className="cursor-pointer hover:bg-white hover:text-black transition-all duration-300" />
+      <FaLinkedin className="cursor-pointer hover:bg-white hover:text-black transition-all duration-300" />
+      <FaYoutube className="cursor-pointer hover:bg-white hover:text-black transition-all duration-300" />
+      <FaPinterest className="cursor-pointer hover:bg-white hover:text-black transition-all duration-300" />
+    </div>
+  </div>
+)}
+            
+   {isMobile ? (
+  // 👇 MOBILE VIEW
+  <div className="h-[13vh] w-full flex items-center justify-between px-4 bg-[#f4f5f8]">
+    <img src={logo} alt="Logo" className="h-[40px]" />
+    <CgMenuLeftAlt className="text-black text-[30px]" />
+  </div>
+) : (
+  // 👇 DESKTOP VIEW
+  <div className="h-[11vh] w-full flex items-center px-20 bg-[#f2f3f8]">
+    <img src={logo} alt="Logo" className="h-[60px] mr-auto" />
+    <div className="flex items-center gap-7 font-serif tracking-[.10em]">
+      <Link to="/home" className="hover:text-[#AD9779] hover:border-b-2 border-[#AD9779]">HOME</Link>
+      <Link to="/aboutus" className="hover:text-[#AD9779] hover:border-b-2 border-[#AD9779]">ABOUT US</Link>
+      <Link to="/services" className="hover:text-[#AD9779] hover:border-b-2 border-[#AD9779]">SERVICES</Link>
+      <Link to="/duediligence" className="hover:text-[#AD9779] hover:border-b-2 border-[#AD9779]">DUE DILIGENCE</Link>
+      <Link to="/contact" className="hover:text-[#AD9779] hover:border-b-2 border-[#AD9779]">CONTACT US</Link>
+    </div>
+    <div className="ml-8 bg-[#AD9779] px-4 py-2 rounded">
+      <CgMenuLeftAlt className="text-black text-[32px]" />
+    </div>
+  </div>
+)}
 
 
      {/* page-1 done with  responsive */}
      
-    <div className="w-full h-auto bg-[url('./assets/A1.webp')] bg-cover bg-center flex flex-col md:flex-row items-center md:items-start px-6 md:px-24 py-20 relative">
-      
+     
   
-      <div className="w-full md:w-2/3 text-center md:text-left text-white sm:h-58 sm:pt-12 sm:pl-33 z-10 ">
-        <h1 className="text-4xl md:text-6xl font-serif font-light mb-4">About Us</h1>
-        <p className="text-[5vw] tracking-[0.18vw] leading-relaxed sm:font-[2vw] sm:text-[0.8vw] sm:w-6xl uppercase ">
-          "We are a trusted law firm committed to providing expert <br /> legal counsel and personalized
-          solutions, ensuring the best <br /> outcomes for our clients in every case."
-        </p>
-      </div>
-
- 
-      <div className="w-full md:w-1/3 mt-10 md:mt-0 flex justify-center md:justify-end z-10 sm:mr-25 sm:pt-22">
-        <nav className="bg-white/30 backdrop-blur-sm px-4 md:px-6 py-3 flex items-center space-x-3 md:space-x-6 ">
-          <a href="#" className="text-white font-semibold flex items-center sm:hover:border-b-1  sm:hover:transition-all">
-            Home
-            <IoIosArrowRoundForward className="ml-2 text-sm md:text-lg" />
-          </a>
-          <a href="#" className="text-[#bb7742] font-medium">About Us</a>
-        </nav>
-      </div>
-
-      <div className="absolute inset-0 bg-black/30"></div>
+ {isMobile ? (
+  // ✅ Mobile layout
+  <div className="w-full h-auto bg-[url('./assets/A1.webp')] bg-cover bg-center flex flex-col items-center px-6 py-20 relative">
+    <div className="w-full text-center text-white z-10">
+      <h1 className="text-4xl font-serif font-light mb-4">About Us</h1>
+      <p className="text-[5vw] leading-relaxed uppercase">
+        ""We are a trusted law firm committed to providing expert legal counsel and personalized solutions, ensuring the best outcomes for our clients in every case.""
+      </p>
     </div>
+    <div className="mt-10 flex justify-center z-10">
+      <nav className="bg-white/30 backdrop-blur-sm px-4 py-3 flex items-center space-x-3">
+        <a href="#" className="text-white font-semibold">Home</a>
+        <a href="#" className="text-[#bb7742] font-medium">About Us</a>
+      </nav>
+    </div>
+    <div className="absolute inset-0 bg-black/30"></div>
+  </div>
+) : (
+  // ✅ Desktop layout
+  <div className="w-full h-auto bg-[url('./assets/A1.webp')] bg-cover bg-center flex flex-row items-start px-24 py-20 relative">
+    <div className="w-2/3 text-left text-white z-10">
+      <h1 className="text-6xl font-serif font-light mb-4">About Us</h1>
+      <p className="text-lg leading-relaxed tracking-widest  uppercase">
+        "We are a trusted law firm committed to providing expert 
+        <br />
+        legal counsel and personalized solutions, ensuring the 
+        <br />
+        best outcomes for our clients in every case.""
+      </p>
+    </div>
+    <div className="w-1/3 mt-0 flex justify-end z-10">
+      <nav className="bg-white/30 backdrop-blur-sm px-6 py-3 flex items-center space-x-6">
+        <a href="#" className="text-white font-semibold">Home</a>
+        <a href="#" className="text-[#bb7742] font-medium">About Us</a>
+      </nav>
+    </div>
+    <div className="absolute inset-0 bg-black/30"></div>
+  </div>
+)}
 
+
+  
     
 
 
     {/* page-2 done with responsive */}
 
+{isMobile ? (
+  // ✅ Mobile View
+  <div className="flex flex-col items-center justify-center min-h-screen bg-white px-6 py-10 gap-8">
+    
+    <div className="h-60 w-60 bg-gradient-to-t from-white to-[#ccbd96] rounded-full z-1 zoom-animate absolute top-160 right-22"></div>
 
-    <div className="flex flex-col md:flex-row items-center md:items-start justify-center min-h-screen bg-white px-6 md:px-20 py-10 gap-8 sm:pt-30">
-      
-      {/* Image Section */}
-      {/* <div className='sm:h-105 sm:w-105 sm:bg-[#B28B4A] /500 sm:absolute sm:top-167 sm:right-279 z-1 sm:rounded-full zoom-animate'>
- 
-      </div> */}
-
-      <div className="sm:h-105 sm:w-105 sm:bg-gradient-to-t mask-b-from-white to-[#ccbd96] sm:absolute sm:top-167 sm:right-280 z-1 sm:rounded-full zoom-animate">
-          </div>
-
-      <div className="w-full md:w-1/2 flex  z-2 justify-center md:justify-center sm:pl-40 sm:pt-14 ">
-        <img
-          src={A2}
-          alt="Statue"
-          className="max-h-[80vh] object-contain" 
-
-        />
-      </div>
-
-      {/* Text Content Section */}
-      <div className="w-full  bg-[#1D2C4A] text-white p-6 md:p-12 shadow-lg sm:h-180 sm:w-152 sm:mr-52">
-        <p className="text-sm tracking-widest text-[#B28B4A] mb-3 sm:tracking-[0.2vw] sm:text-[.6vw]">ABOUT AEMILIUS CUPERO</p>
-        <h2 className="text-2xl md:text-4xl font-bold mb-6 leading-snug sm:font-light">
-          Fighting for Your Rights, Delivering Results.
-        </h2>
-        <p className="text-base  leading-relaxed mb-4 sm:font-[.6vw]">
-          At our firm, we truly understand what you’re going through because  we’ve been there ourselves. 
-          That’s why we founded this practice — to support individuals like you who have faced similar struggles. 
-          Our mission is simple: to provide unwavering support and guidance every step of the way, helping you 
-          navigate your legal challenges with confidence.
-        </p>
-        <p className="text-base sm:font-[.6vw] leading-relaxed mb-4">
-          We pride ourselves on being an authentic and reliable law firm with an impressive track record of success. 
-          Our clients consistently receive exactly what they expect, and not one promise goes unfulfilled. 
-          For years, we’ve been leading the industry, and our hard work has earned us a reputation as one of the most 
-          trusted firms around. We’ve been recognized by top media outlets for our incredible success, 
-          and our momentum only continues to grow stronger!
-        </p>
-        <p className="text-base md:text-[0.96vw] font-bold ">
-          <span className="font-bold text-white sm:font-[1vw]">
-            At our firm, we’re not just here to represent you — we’re here to fight for you with passion and dedication. 
-            You’re in capable hands, and we’re ready to help you achieve the results you deserve.
-          </span>
-        </p>
-      </div>
+    <div className="w-full flex justify-center z-2 ">
+      <img
+        src={A2}
+        alt="Statue"
+        className="max-h-[60vh] object-contain relative"
+      />
     </div>
+
+    <div className="w-full bg-[#1D2C4A] text-white p-6 shadow-lg">
+      <p className="text-sm tracking-widest text-[#B28B4A] mb-3">
+        ABOUT AEMILIUS CUPERO
+      </p>
+      <h2 className="text-2xl font-bold mb-6 leading-snug">
+        Fighting for Your Rights, Delivering Results.
+      </h2>
+      <p className="text-base leading-relaxed mb-4">
+        At our firm, we truly understand what you’re going through because we’ve been there ourselves.
+        That’s why we founded this practice — to support individuals like you who have faced similar struggles.
+        Our mission is simple: to provide unwavering support and guidance every step of the way,
+        helping you navigate your legal challenges with confidence.
+      </p>
+      <p className="text-base leading-relaxed mb-4">
+        We pride ourselves on being an authentic and reliable law firm with an impressive track record of success.
+        Our clients consistently receive exactly what they expect, and not one promise goes unfulfilled.
+        For years, we’ve been leading the industry, and our hard work has earned us a reputation as one of the most trusted firms around.
+      </p>
+      <p className="text-base font-bold">
+        At our firm, we’re not just here to represent you — we’re here to fight for you with passion and dedication.
+        You’re in capable hands, and we’re ready to help you achieve the results you deserve.
+      </p>
+    </div>
+
+  </div>
+) : (
+  // ✅ Desktop View
+  <div className="flex flex-row items-start justify-center min-h-screen bg-white px-20 py-10 gap-8">
+    
+    <div className="h-[26rem] w-[26rem] bg-gradient-to-t from-white to-[#ccbd96] absolute top-[42rem] right-[70rem] z-1 rounded-full zoom-animate"></div>
+
+    <div className="w-1/2 flex justify-center z-2 pl-10 pt-14">
+      <img
+        src={A2}
+        alt="Statue"
+        className="max-h-[80vh] object-contain"
+      />
+    </div>
+
+    <div className="w-full bg-[#1D2C4A] text-white p-12 shadow-lg max-w-[40rem] mr-20">
+      <p className="text-sm tracking-[0.2vw] text-[#B28B4A] mb-3">
+        ABOUT AEMILIUS CUPERO
+      </p>
+      <h2 className="text-4xl font-light mb-6 leading-snug">
+        Fighting for Your Rights, Delivering Results.
+      </h2>
+      <p className="text-[0.9vw] leading-relaxed mb-4">
+        At our firm, we truly understand what you’re going through because we’ve been there ourselves.
+        That’s why we founded this practice — to support individuals like you who have faced similar struggles.
+        Our mission is simple: to provide unwavering support and guidance every step of the way,
+        helping you navigate your legal challenges with confidence.
+      </p>
+      <p className="text-[0.9vw] leading-relaxed mb-4">
+        We pride ourselves on being an authentic and reliable law firm with an impressive track record of success.
+        Our clients consistently receive exactly what they expect, and not one promise goes unfulfilled.
+        For years, we’ve been leading the industry, and our hard work has earned us a reputation as one of the most trusted firms around.
+        We’ve been recognized by top media outlets for our incredible success, and our momentum only continues to grow stronger!
+      </p>
+      <p className="text-[0.96vw] font-bold">
+        At our firm, we’re not just here to represent you — we’re here to fight for you with passion and dedication.
+        You’re in capable hands, and we’re ready to help you achieve the results you deserve.
+      </p>
+    </div>
+
+  </div>
+)}
+
+
+
 
     {/* page-3 done with responsive */}
 
-    <div className="bg-[#222c44] bg-[url('./assets/A3.webp')] bg-cover w-full py-10 sm:h-270">
-      {/* Top Section */}
-      <div className="w-full flex flex-col md:flex-row px-6 md:px-20 gap-8">
-        <div className="md:w-1/2">
-          <p className="text-[3vw] tracking-[1vw] font-bold l md:text-[.6vw] text-[#AD9779] sm:tracking-[.3vw] pt-4 md:pt-20 sm:pl-73 uppercase">
-            ____why choose us
-          </p>
-          <h1 className="text-white text-4xl  md:text-[2.3vw] font-medium pt-2 md:pt-2 sm:pl-73 leading-11">
-            No More Worries, <br />You Can Trust Our Lawyers.
-          </h1>
-        </div>
+    
 
-        <div className="md:w-1/2">
-          <p className="text-white text-[5vw] md:text-base leading-8 pt-6 md:pt-20 sm:mt-16 ">
-          With our experienced legal team by your side, you can put your worries to <br /> rest. We are committed to providing trusted, 
-          reliable legal support, ensuring <br /> that your financial litigation matters are handled with the utmost care and <br /> expertise.
-           Trust our lawyers to protect your interests and guide you through <br /> complex legal challenges with confidence.
+
+{isMobile ? (
+  // ✅ MOBILE LAYOUT
+  <div className="bg-[#222c44] bg-[url('./assets/A3.webp')] bg-cover w-full py-10">
+    <div className="flex flex-col px-4 gap-8">
+      {/* Intro Text */}
+      <div className="w-full text-center">
+        <p className="text-[4vw] tracking-[0.6vw] font-bold text-[#AD9779] uppercase pt-4">
+          ____why choose us
+        </p>
+        <h1 className="text-white text-[6vw] font-medium pt-2 leading-tight">
+          No More Worries,<br />You Can Trust Our Lawyers.
+        </h1>
+      </div>
+
+      <div className="w-full text-white text-[3vw] leading-10">
+        With our experienced legal team by your side, you can put your worries to rest. We are committed to providing trusted, reliable legal support, ensuring that your financial litigation matters are handled with the utmost care and expertise. Trust our lawyers to protect your interests and guide you through complex legal challenges with confidence.
+      </div>
+
+      {/* 4 Card Grid */}
+      <div className="grid grid-cols-1 gap-6 text-white">
+        {[...Array(4)].map((_, i) => (
+          <div key={i} className="group bg-white/10 border border-[#767880] p-4 text-center hover:bg-white hover:text-gray-700 transition-all">
+            <div className="bg-[#b79f7f] p-4 mb-4 inline-block h-30 w-30 mx-auto">
+              {i === 0 ? <IoDiamondOutline className="text-white text-8xl" /> :
+               i === 1 ? <img src={A10} className="h-20 w-20 brightness-0 invert " /> :
+               i === 2 ? <img src={A11} className="h-20 w-20 brightness-0 invert " /> :
+                         <IoIosContact className="text-white text-8xl" />}
+            </div>
+            <h3 className="text-4xl font-bold mb-2 group-hover:text-[#b79f7f]">
+              {["Our Approach", "Core Values", "Our Journey", "Our Solutions"][i]}
+            </h3>
+            <p className="text-[4vw] leading-12 group-hover:text-[#515257]">
+              {[
+                "We deliver customized legal strategies with integrity, precision, and a client-focused approach for clients worldwide.",
+                "Guided by ethics, excellence, and empathy, we are committed to protecting our clients' rights and interests.",
+                "From our foundation to becoming a trusted legal partner, our journey reflects dedication to justice and client success.",
+                "We provide comprehensive legal services spanning corporate law, litigation, compliance, and personal legal matters."
+              ][i]}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      {/* Mission & Vision */}
+      <div className="bg-white text-center text-black py-10 space-y-10">
+        <div>
+          <GoRocket className="text-[#a38f7a] text-6xl mx-auto mb-3" />
+          <h2 className="text-xl font-serif mb-2">Mission</h2>
+          <p className="text-[3.5vw] font-semibold px-4">
+            Our mission is to provide exceptional financial litigation services with integrity, expertise, and attention to detail, safeguarding our clients' financial interests globally.
+          </p>
+        </div>
+        <div>
+          <SlTrophy className="text-[#a38f7a] text-6xl mx-auto mb-3" />
+          <h2 className="text-xl font-serif mb-2">Vision</h2>
+          <p className="text-[3.5vw] font-semibold px-4">
+            To be a global leader in financial litigation, delivering results and empowering clients to protect and grow their financial assets.
           </p>
         </div>
       </div>
+    </div>
+  </div>
+) : (
+  // ✅ DESKTOP LAYOUT
+  <div className="bg-[#222c44] bg-[url('./assets/A3.webp')] bg-cover w-full py-20 relative" >
+    <div className="w-full flex flex-col md:flex-row px-20 gap-16">
+      <div className="md:w-1/2 pt-10">
+        <p className="text-[0.9vw] tracking-[0.6vw] font-bold text-[#AD9779] uppercase">
+          ____why choose us
+        </p>
+        <h1 className="text-white text-[2.5vw] font-medium leading-snug pt-4">
+          No More Worries,<br />You Can Trust Our Lawyers.
+        </h1>
+      </div>
+
+      <div className="md:w-1/2 text-white text-[1vw] leading-8 pt-10">
+        With our experienced legal team by your side, you can put your worries to rest. We are committed to providing trusted, reliable legal support, ensuring that your financial litigation matters are handled with the utmost care and expertise. Trust our lawyers to protect your interests and guide you through complex legal challenges with confidence.
+      </div>
+    </div>
+
+    {/* Grid Cards */}
+    {/* <div className="max-w-7xl mx-auto grid grid-cols-4 gap-6 mt-20 px-10 text-white">
+      
+      ...
+    </div> */}
 
 
-      {/* Card Section */}
-      <div className="text-white font-serif py-16 sm:mt-9">
+ <div className="text-white font-serif py-16 sm:mt-9">
 
 
       
 
 
-    <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 px-4 md:px-10 ">
+    <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 px-4 md:px-30 ">
   
-         {/* card-1 */}
+    
 
           <div className="group bg-white/10 border border-[#767880] sm:h-89 text-center hover:bg-white hover:text-gray-700 sm:p-0 h-85 transition-all">
     
-    {/* Flipping icon */}
          <div className="bg-[#b79f7f] p-4 mb-4 inline-block h-25 w-25 mx-auto  ">
             <IoDiamondOutline className="text-white text-7xl sm:h-17 sm:w-17 sm:text-1xl transition-transform duration-500 group-hover:rotate-y-180 [transform-style:preserve-3d] [perspective:1000px]" />
          </div>
@@ -245,10 +434,10 @@ const About = () =>
         </div>
 
 
-          {/* Card 2 */}
+          
             <div className="group bg-white/10 border border-[#767880] sm:h-89 text-center hover:bg-white hover:text-gray-700 sm:p-0 h-85 transition-all">
     
-    {/* Flipping icon */}
+    
          <div className="bg-[#b79f7f] p-4 mb-4 inline-block h-25 w-25 mx-auto  ">
           
           <img  src={A10} className="filter brightness-0 invert transition-transform duration-500 group-hover:rotate-y-180
@@ -265,10 +454,9 @@ const About = () =>
           </p>
         </div> 
 
-          {/* Card 3 */}
            <div className="group bg-white/10 border border-[#767880] sm:h-89 text-center hover:bg-white hover:text-gray-700 sm:p-0 h-85 transition-all">
     
-          {/* Flipping icon */}
+         
          <div className="bg-[#b79f7f] p-4 mb-4 inline-block h-25 w-25 mx-auto  ">
             <img  src={A11} className="filter brightness-0 invert transition-transform duration-500 group-hover:rotate-y-180
            [transform-style:preserve-3d] [perspective:1000px]"/>        
@@ -284,10 +472,8 @@ const About = () =>
         </div>
 
 
-          {/* Card 4 */}
          <div className="group bg-white/10 border border-[#767880] sm:h-89 text-center hover:bg-white hover:text-gray-700 sm:p-0 h-85 transition-all">
     
-       {/* Flipping icon */}
          <div className="bg-[#b79f7f] p-4 mb-4 inline-block h-25 w-25 mx-auto  ">
             <IoIosContact className="text-white text-7xl sm:h-17 sm:w-17 sm:text-1xl transition-transform duration-500 group-hover:rotate-y-180 [transform-style:preserve-3d] [perspective:1000px]" />
          </div>
@@ -304,40 +490,27 @@ const About = () =>
             
         </div>
       </div>
-
-
-      {/* Mission and Vision */}
-      <div className="bg-white py-10 shadow-md mt-6 sm:w-300 sm:ml-89 sm:mt-18">
-
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-gray-300 ">
-          {/* Mission */}
-          <div className="flex-1 p-6 md:p-5 text-center">
-            <GoRocket className="text-[#a38f7a] text-7xl mb-4 mx-auto sm:text-7xl sm:transition-transform sm:duration-500 sm:hover:-translate-y-2" />
-            <h2 className="text-[#1a1a1a] text-2xl md:text-xl font-serif mb-4">Mission</h2>
-            <p className="text-gray-600 font-semibold text-[4vw] md:text-base leading-6">
-          Our mission is to provide exceptional financial litigation services <br /> to clients worldwide, delivering innovative,
-           results-driven legal <br /> solutions with a commitment to integrity, expertise, and <br /> meticulous attention to detail. We aim to
-            safeguard our clients' <br /> financial interests and achieve favorable outcomes through <br /> diligent representation and strategic litigation.
-
-
-            </p>
-          </div>
-
-          {/* Vision */}
-          <div className="flex-1 p-6 md:p-5 text-center">
-            <SlTrophy className="text-[#a38f7a] text-7xl mb-4 mx-auto sm:text-7xl sm:transition-transform sm:duration-500 sm:hover:-translate-y-2" />
-            <h2 className="text-[#1a1a1a] text-2xl md:text-xl font-serif mb-4 ">Vision</h2>
-            <p className="text-gray-600 font-semibold text-[4vw] md:text-base leading-6 ">
-             To be a globally recognized leader in financial litigation, known <br /> for our unwavering dedication to clients,
-              excellence in legal <br /> practice, and our ability to navigate complex financial disputes  <br />with precision and success.
-               We strive to empower clients with <br /> the legal tools to protect and grow their financial assets on a <br /> global scale.
-            </p>
-          </div>
+    {/* Mission & Vision Section */}
+    <div className="bg-white py-8 mt-20 shadow-lg max-w-9xl ml-60 absolute top-170">
+      <div className="max-w-7xl mx-auto flex divide-x divide-gray-300">
+        <div className="w-1/2 px-10 text-center">
+          <GoRocket className="text-[#a38f7a] text-7xl mb-6 mx-auto hover:-translate-y-2 transition" />
+          <h2 className="text-xl font-serif mb-4">Mission</h2>
+          <p className="text-gray-700 font-semibold text-[0.95vw] leading-7">
+Our mission is to provide exceptional financial litigation services <br /> to clients worldwide, delivering innovative, results-driven legal <br /> solutions with a commitment to integrity, expertise, and <br /> meticulous attention to detail. We aim to safeguard our clients' <br /> financial interests and achieve favorable outcomes through <br /> diligent representation and strategic litigation.          </p>
+        </div>
+        <div className="w-1/2 px-10 text-center">
+          <SlTrophy className="text-[#a38f7a] text-7xl mb-6 mx-auto hover:-translate-y-2 transition" />
+          <h2 className="text-xl font-serif mb-4">Vision</h2>
+          <p className="text-gray-700 font-semibold text-[0.95vw] leading-7">
+To be a globally recognized leader in financial litigation, known <br /> for our unwavering dedication to clients, excellence in legal <br /> practice, and our ability to navigate complex financial disputes <br /> with precision and success. We strive to empower clients with <br /> the legal tools to protect and grow their financial assets on a <br /> global scale.          </p>
         </div>
       </div>
-
     </div>
- 
+  </div>
+)}
+
+
 
 
 
@@ -469,8 +642,8 @@ const About = () =>
 
     {/* page-5 done with responsive */}
 
-       <div className="flex flex-col md:flex-row w-full mx-auto md:h-[600px] ">
-      {/* Left Text Section */}
+       {/* <div className="flex flex-col md:flex-row w-full mx-auto md:h-[600px] ">
+    
       <div className="w-full md:w-[53%] bg-[url('./assets/A4.webp')] bg-cover bg-center px-6 md:pl-[6vw] py-10 flex items-center">
         <div className="max-w-xl md:ml-[12vw]">
           <h2 className="text-4xl md:text-[40px] font-normal leading-14 text-[#0f1f3d] mb-6">
@@ -489,7 +662,7 @@ const About = () =>
         </div>
       </div>
 
-      {/* Middle Vertical Banner */}
+     
     
      <div className="w-full md:w-[15%] bg-[#0f1f3d] relative h-[490px] md:h-auto">
       <img
@@ -510,7 +683,7 @@ const About = () =>
       </div>
     </div>
 
-      {/* Right Image Section */}
+    
       <div className="w-full md:w-[33%]  md:block h-100">
         <img
           src={A5}
@@ -518,14 +691,129 @@ const About = () =>
           className="w-full h-full object-cover"
         />
       </div>
+    </div> */}
+
+{isMobile ? (
+  // ✅ Mobile View
+  <div className="flex flex-col w-full">
+
+    {/* Left Section (Text & Background Image) */}
+    <div className="w-full bg-[url('./assets/A4.webp')] bg-cover bg-center px-6 py-10 flex items-center">
+      <div className="text-[#0f1f3d] ">
+        <h2 className="text-5xl font-medium leading-15 mb-6">
+          We prioritize your needs with <br />
+          the utmost respect, providing <br />
+          dedicated support every step <br />
+          of the way.
+        </h2>
+        <p className="text-sm text-[#6b6b6b] leading-relaxed">
+          We are dedicated to providing exceptional service with the utmost respect, always
+          putting your needs first. Our team is available 24/7 throughout the week, ensuring
+          that you receive continuous support and personalized attention. We are here to
+          guide you at every step, offering reliable assistance whenever you need it, and
+          working tirelessly to achieve the best outcomes for you.
+        </p>
+      </div>
     </div>
+
+    {/* Middle Section (Hour Card) */}
+
+    <div className='flex'>
+
+   
+    <div className="w-full bg-[#0f1f3d] relative h-[400px] overflow-hidden ">
+      <img
+        alt="Abstract background"
+        src="https://storage.googleapis.com/a1aa/image/669a006f-8d2b-4bd9-2149-ee24c85d55de.jpg"
+        className="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none"
+      />
+      <div className="relative flex flex-col items-center justify-center h-full px-4 py-8 text-center">
+        <div className="flex items-center justify-center w-[80px] h-[80px] rounded-full bg-[#3f3f3f66] mb-6 hover:scale-110 transition-all duration-300">
+          <IoIosArrowDropleftCircle className="text-[#a49174] text-5xl" />
+        </div>
+        <h3 className="text-[#a49174] text-5xl font-serif mb-2 leading-none pt-2">
+          {hour} Hr
+        </h3>
+        <p className="text-white text-lg pt-4 font-semibold">
+          5 <span>DAYS A WEEK</span>
+        </p>
+      </div>
+    </div>
+
+    {/* Right Section (Image Only) */}
+    <div className="w-full h-[400px]">
+      <img
+        src={A5}
+        alt="Two men discussing work"
+        className="w-full h-full object-cover"
+      />
+    </div>
+     </div>
+  </div>
+) : (
+  // ✅ Desktop View
+  <div className="flex flex-row w-full md:h-[600px]">
+
+    {/* Left Section */}
+    <div className="w-[53%] bg-[url('./assets/A4.webp')] bg-cover bg-center px-6 md:pl-[6vw] py-10 flex items-center">
+      <div className="max-w-xl md:ml-[6vw]">
+        <h2 className="text-[35px] font-normal leading-12  text-[#0f1f3d] mb-15">
+          We prioritize your needs with <br className="hidden md:block" />
+          the utmost respect, providing <br className="hidden md:block" />
+          dedicated support every step of <br className="hidden md:block" />
+          the way.
+        </h2>
+        <p className="text-[15px] text-[#6b6b6b] leading-relaxed">
+          We are dedicated to providing exceptional service with the utmost respect, always
+          putting your needs first. Our team is available 24/7 throughout the week, ensuring
+          that you receive continuous support and personalized attention. We are here to
+          guide you at every step, offering reliable assistance whenever you need it, and
+          working tirelessly to achieve the best outcomes for you.
+        </p>
+      </div>
+    </div>
+
+    {/* Center Section */}
+    <div className="w-[15%] bg-[#0f1f3d] relative h-auto flex-shrink-0">
+      <img
+        alt="Abstract background"
+        src="https://storage.googleapis.com/a1aa/image/669a006f-8d2b-4bd9-2149-ee24c85d55de.jpg"
+        className="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none select-none"
+      />
+      <div className="relative flex flex-col items-center justify-center h-full text-center px-6 py-20">
+        <div className="flex items-center justify-center w-[100px] h-[100px] rounded-full bg-[#3f3f3f66] mb-6 hover:scale-110 transition-all duration-300">
+          <IoIosArrowDropleftCircle className="text-[#a49174] text-6xl" />
+        </div>
+        <h3 className="text-[#a49174] text-[69px] font-serif font-normal mb-2 leading-none pt-10 transition-all">
+          {hour} Hr
+        </h3>
+        <p className="text-white text-[24px] pt-7 font-semibold tracking-wide">
+          5 <span>DAYS A WEEK</span>
+        </p>
+      </div>
+    </div>
+
+    {/* Right Section */}
+    <div className="w-[33%] h-full">
+      <img
+        src={A5}
+        alt="Two men discussing work"
+        className="w-full h-full object-cover"
+      />
+    </div>
+
+  </div>
+)}
+
+
+
 
     {/* page-6 done with responsive */}
 
   
     
 
-     <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-0 pt-20 sm:pt-24 pb-16 sm:pb-20">
+     {/* <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-0 pt-20 sm:pt-24 pb-16 sm:pb-20">
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto">
         <p className="text-[11px] sm:text-[12px] tracking-[2px] sm:tracking-[4px] text-[#b89f7a] font-semibold mb-2">
@@ -542,14 +830,13 @@ const About = () =>
         <div className="border border-[#b89f7a] w-20 sm:w-30 mx-auto mt-6 sm:mt-8"></div>
       </div>
 
-      {/* Slider */}
       <div className="mt-12 sm:mt-16 max-w-8xl mx-auto">
         <Slider {...settings}>
 
-  {/* Slide 1 */}
+
         <div className='flex flex-col'>
           <div className="flex flex-wrap justify-center gap-6">
-  {/* Testimonial Card 1 */}
+  
          <div className="border border-gray-300 hover:border-none hover:shadow-2xl transition-all duration-300 w-full sm:w-[48%] ">
     <div className="p-6 sm:p-8 text-[15px] sm:text-[16px] leading-7 font-serif text-[#0a1229] sm:pt-12">
       "I am very happy with the service I received from Aemilius Cupero. They <br/> helped me recover my money back and I would recommend them to anyone <br /> who is looking to recover their funds."
@@ -577,7 +864,7 @@ const About = () =>
             </div>    
     </div>
          </div>
-{/* Testimonial Card 2 */}
+
          <div className="border border-gray-300 hover:border-none hover:shadow-2xl transition-all duration-300 w-full sm:w-[48%]">
     <div className="p-6 sm:p-8 text-[15px] sm:text-[16px] leading-7 font-serif text-[#0a1229] sm:pt-12">
       "I knew my case was complicated beacause it involved cryptos, <br /> I would like to appreciate Aemilius Cupero's successfully efforts <br/> that got my money back"
@@ -600,13 +887,12 @@ const About = () =>
         </div>
 
 
-{/* slide 2 perfect */}
+
    
    <div className='flex flex-col'>
    <div className="flex flex-wrap justify-center gap-6">
 
 
-  {/* Testimonial Card 1 */}
 
     <div className="border border-gray-300 hover:border-none hover:shadow-2xl transition-all duration-300 w-full sm:w-[48%]">
     <div className="p-6 sm:p-8 text-[15px] sm:text-[16px] leading-7 font-serif text-[#0a1229] sm:pt-12">
@@ -627,7 +913,6 @@ const About = () =>
     </div>
         </div>
 
-{/* Testimonial Card 2 */}
 
     <div className="border border-gray-300 hover:border-none hover:shadow-2xl transition-all duration-300 w-full sm:w-[48%]">
     <div className="p-6 sm:p-8 text-[15px] sm:text-[16px] leading-7 font-serif text-[#0a1229] sm:pt-12">
@@ -651,12 +936,12 @@ const About = () =>
   </div>
   
 
-  {/* slide 3 perfect*/}
+  
     <div className='flex flex-col'>
    <div className="flex flex-wrap justify-center gap-6">
 
 
-  {/* Testimonial Card 1 */}
+ 
 
     <div className="border border-gray-300 hover:border-none hover:shadow-2xl transition-all duration-300 w-full sm:w-[48%]">
     <div className="p-6 sm:p-8 text-[15px] sm:text-[16px] leading-7 font-serif text-[#0a1229] sm:pt-12">
@@ -678,7 +963,7 @@ const About = () =>
     </div>
         </div>
 
-{/* Testimonial Card 2 */}
+
 
     <div className="border border-gray-300 hover:border-none hover:shadow-2xl transition-all duration-300 w-full sm:w-[48%]">
     <div className="p-6 sm:p-8 text-[15px] sm:text-[16px] leading-7 font-serif text-[#0a1229] sm:pt-12">
@@ -702,13 +987,11 @@ const About = () =>
    </div>
   </div>         
  
-   {/* slide 4 perfect */}
 
    <div className='flex flex-col'>
    <div className="flex flex-wrap justify-center gap-6">
 
 
-  {/* Testimonial Card 1 */}
 
     <div className="border border-gray-300 hover:border-none hover:shadow-2xl transition-all duration-300 w-full sm:w-[48%]">
     <div className="p-6 sm:p-8 text-[15px] sm:text-[16px] leading-7 font-serif text-[#0a1229] sm:pt-12">
@@ -730,7 +1013,7 @@ const About = () =>
     </div>
         </div>
 
-{/* Testimonial Card 2 */}
+
 
     <div className="border border-gray-300 hover:border-none hover:shadow-2xl transition-all duration-300 w-full sm:w-[48%]">
     <div className="p-6 sm:p-8 text-[15px] sm:text-[16px] leading-7 font-serif text-[#0a1229] sm:pt-12">
@@ -758,7 +1041,68 @@ const About = () =>
 
       </Slider>
       </div>
-    </section>
+    {/* </section> */} 
+
+
+
+
+
+<div className="w-full flex flex-col sm:flex-row flex-wrap justify-center gap-6">
+  {isMobile ? (
+    // MOBILE layout (1 card per row)
+    testimonials.map((t, idx) => (
+      <div key={idx} className="w-full border border-gray-300 hover:border-none hover:shadow-2xl transition-all duration-300">
+        <div className="p-6 text-[15px] leading-7 font-serif text-[#0a1229]">
+          {t.message}
+        </div>
+        <div className="bg-[#0a1229] flex flex-col items-start px-6 py-5 space-y-4">
+          <div className="flex items-center space-x-4">
+            <img src={t.image} alt={t.name} className="w-14 h-14 rounded-full border border-[#b89f7a] object-cover" />
+            <div className="text-white text-[12px] font-semibold">
+              <p className="tracking-[1px]">{t.name}</p>
+              <p className="text-[13px] font-normal mt-1">{t.country}</p>
+            </div>
+          </div>
+          <div className="flex items-center space-x-4 justify-between w-full">
+            <div className="text-[#b89f7a] flex text-[16px] font-semibold tracking-widest">
+              {[...Array(5)].map((_, i) => <IoMdStar key={i} />)}
+            </div>
+            <div className="text-[#b89f7a] text-xl font-extrabold">
+              <SiComma /><SiComma />
+            </div>
+          </div>
+        </div>
+      </div>
+    ))
+  ) : (
+    // DESKTOP layout (2 cards per row)
+    testimonials.map((t, idx) => (
+      <div key={idx} className="w-full sm:w-[48%] border border-gray-300 hover:border-none hover:shadow-2xl transition-all duration-300">
+        <div className="p-8 text-[16px] leading-7 font-serif text-[#0a1229] pt-12">
+          {t.message}
+        </div>
+        <div className="bg-[#0a1229] flex flex-row items-center justify-between px-8 py-6">
+          <div className="flex items-center space-x-4">
+            <img src={t.image} alt={t.name} className="w-16 h-16 rounded-full border border-[#b89f7a] object-cover" />
+            <div className="text-white text-[12px] font-semibold leading-tight">
+              <p className="tracking-[2px]">{t.name}</p>
+              <p className="text-[13px] font-normal mt-1">{t.country}</p>
+            </div>
+          </div>
+          <div className="flex items-center space-x-6">
+            <div className="text-[#b89f7a] flex pr-8 text-[18px] font-semibold tracking-widest">
+              {[...Array(5)].map((_, i) => <IoMdStar key={i} />)}
+            </div>
+            <div className="text-[#b89f7a] text-2xl font-extrabold pb-2">
+              <SiComma /><SiComma />
+            </div>
+          </div>
+        </div>
+      </div>
+    ))
+  )}
+</div>
+
 
 
       {/* page-7 done with responsive */}
