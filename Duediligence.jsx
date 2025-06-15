@@ -37,12 +37,10 @@ import footer1 from "./assets/footer1.webp"
 import footer2 from "./assets/footer2.webp"
 import footer3 from "./assets/footer3.webp"
 
+import { useMediaQuery } from 'react-responsive';
 
 
-
-
-
-
+import { MdCall } from "react-icons/md";
 
 const Counter = ({ end, suffix }) => {
   const [count, setCount] = useState(0);
@@ -147,6 +145,7 @@ const contentMap = {
 
 
 function Duediligence( ) {
+  const isMobile = useMediaQuery({ maxWidth: 1368 });
   const [activeTab, setActiveTab] = useState('Verify Authenticity');
 const [visibleLogos, setVisibleLogos] = useState(logos.slice(0, 6));
 const [startIndex, setStartIndex] = useState(0);
@@ -166,195 +165,309 @@ useEffect(() => {
 }, [startIndex]);
     return(
             <> 
-                <div className="hidden sm:flex items-center pl-52 sm:h-[7vh] w-full bg-[#1a243f]">
-                       <p className="text-white text-[14px]">WELCOME TO AEMILIUS CUPERO</p>
-                       <div className="hidden  sm:flex items-center gap-8 text-[20px] text-white ml-270 p-8">
-                            <FaMedium  className="group cursor-pointer transition-all duration-300 hover:bg-white hover:text-black"/>
-                            <FaLinkedin className="group cursor-pointer transition-all duration-300 hover:bg-white hover:text-black"/>
-                            <FaYoutube className="group cursor-pointer transition-all duration-300 hover:bg-white hover:text-black" />
-                            <FaPinterest className="group cursor-pointer transition-all duration-300 hover:bg-white hover:text-black"/>
-                       </div>
+               {/* navbar */}
+                          
+                   
+               {isMobile ? (
+                 // ✅ Mobile layout
+                 <div className="flex items-center px-4 py-2 bg-[#1a243f] hidden">
+                   <p className="text-white text-sm">WELCOME TO AEMILIUS CUPERO</p>
+                   <div className="flex items-center gap-4 text-white text-lg ml-auto">
+                     <FaMedium />
+                     <FaLinkedin />
+                     <FaYoutube />
+                     <FaPinterest />
+                   </div>
                  </div>
-                 <div className="h-[13vh] w-full flex items-star ml-0 mt-0 sm:h-[11vh] sm:ml-0 sm:mt-0">
-        <img src={logo} alt=""  className="h-[43%] ml-4.5 mt-7.5 sm:h-[37%] sm:ml-50 sm:mt-7 "/>
-         <div className="hidden sm:flex items-center justify-end gap-7 ml-165 font-serif tracking-[.10em]">
-        <Link to="/home" className="sm:hover:cursor-pointer sm:hover:text-[#AD9779] sm:hover:border-b-2 sm:hover:border-[#AD9779]">HOME</Link>
-        <Link to="/aboutus"  className="sm:hover:cursor-pointer sm:hover:text-[#AD9779] sm:hover:border-b-2 sm:hover:border-[#AD9779]">ABOUT US</Link>
-        <Link to="/services"  className="sm:hover:cursor-pointer sm:hover:text-[#AD9779] sm:hover:border-b-2 sm:hover:border-[#AD9779]">SERVICES</Link>
-         <Link to="/duediligence"  className="sm:hover:cursor-pointer sm:hover:text-[#AD9779] sm:hover:border-b-2 sm:hover:border-[#AD9779]">DUE DILIGENCE</Link>
-        <Link to="/contact"  className="sm:hover:cursor-pointer sm:hover:text-[#AD9779] sm:hover:border-b-2 sm:hover:border-[#AD9779]">CONTACT US</Link>
-      </div>
-        <div className="lg:flex items-center  sm:h-full sm:bg-[#AD9779] w-[5.3vw] ml-15 ">
-            <CgMenuLeftAlt className="font-thin ml-20 mt-8 text-black sm:text-white text-[45px] sm:ml-7 sm:mt-0"/>
-        </div>
-      </div>
+               ) : (
+                 // ✅ Desktop layout
+                 <div className="flex items-center pl-52 h-[7vh] w-full bg-[#1a243f]">
+                   <p className="text-white text-[14px]">WELCOME TO AEMILIUS CUPERO</p>
+                   <div className="flex items-center gap-8 text-[20px] text-white ml-auto pr-12">
+                     <FaMedium className="cursor-pointer hover:bg-white hover:text-black transition-all duration-300" />
+                     <FaLinkedin className="cursor-pointer hover:bg-white hover:text-black transition-all duration-300" />
+                     <FaYoutube className="cursor-pointer hover:bg-white hover:text-black transition-all duration-300" />
+                     <FaPinterest className="cursor-pointer hover:bg-white hover:text-black transition-all duration-300" />
+                   </div>
+                 </div>
+               )}
+                           
+                  {isMobile ? (
+                 // 👇 MOBILE VIEW
+                 <div className="h-[13vh] w-full flex items-center justify-between px-4 bg-[#f4f5f8]">
+                   <img src={logo} alt="Logo" className="h-[40px]" />
+                   <CgMenuLeftAlt className="text-black text-[30px]" />
+                 </div>
+               ) : (
+                 // 👇 DESKTOP VIEW
+                 <div className="h-[11vh] w-full flex items-center px-20 bg-[#f2f3f8]">
+                   <img src={logo} alt="Logo" className="h-[60px] mr-auto" />
+                   <div className="flex items-center gap-7 font-serif tracking-[.10em]">
+                     <Link to="/home" className="hover:text-[#AD9779] hover:border-b-2 border-[#AD9779]">HOME</Link>
+                     <Link to="/aboutus" className="hover:text-[#AD9779] hover:border-b-2 border-[#AD9779]">ABOUT US</Link>
+                     <Link to="/services" className="hover:text-[#AD9779] hover:border-b-2 border-[#AD9779]">SERVICES</Link>
+                     <Link to="/duediligence" className="hover:text-[#AD9779] hover:border-b-2 border-[#AD9779]">DUE DILIGENCE</Link>
+                     <Link to="/contact" className="hover:text-[#AD9779] hover:border-b-2 border-[#AD9779]">CONTACT US</Link>
+                   </div>
+                   <div className="ml-8 bg-[#AD9779] px-4 py-2 rounded">
+                     <CgMenuLeftAlt className="text-black text-[32px]" />
+                   </div>
+                 </div>
+               )}
 
-           <div className="relative h-[360px] w-full bg-black text-white">
-                {/* Background Image */}
-                <div className="absolute inset-0">
-                  <img
-                    src={ptt_career}
-                    alt="Due Diligence Background"
-                    className="w-full h-90 opacity-70 object-cover"
-                  />
-                </div>
-           
-                {/* Overlay Content */}
-                <div className="relative z-10 max-w-7xl mx-auto px-0 py-24 flex flex-col gap-7 md:flex-row md:items-center md:justify-between ">
-                  {/* Text Section */}
-                  <div className="max-w-4xl space-y-6">
-                    <h1 className="md:text-5xl font-semibold mb-2 mt-15">Due Diligence</h1>
-                    <p className="text-base md:text-50 text-gray-200 leading-relaxed tracking-[0.2em] uppercase">
+
                
-                     "Our due diligence services empower you to make informed <br></br>investment decisions by thoroughly researching <br></br>opportunities—whether you choose to do it yourself or <br></br>partner
-                      with us for expert guidance."
-                    </p>
-                  </div>
-          
-                  {/* Breadcrumb */}
-                  <div className="mt-10 md:mt-0  md:justify-end">
-                    <div className=" bg-transparent bg-opacity-40 text-sm px-4 py-2 rounded-md flex items-center space-x-2">
-                      {/* Using regular anchor tag */}
-                      <a href="/" className="text-white hover:underline">
-                        Home
-                      </a>
-                      <span className="text-white">→</span>
-                      <span className="text-[#c1a675]">Due Diligence</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-           
-  <div className="sm:h-105 sm:w-105 sm:bg-gradient-to-t mask-b-from-white to-[#ccbd96] sm:absolute sm:top-185 sm:right-300 z-10 sm:rounded-full zoom-animate">
-
-          </div>
-
-    <div className="bg-white py-20 px-6 md:px-16 lg:px-24 mt-10">
-  <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
-
-      {/* Background Circle */}
-       
-        {/* Left Image */}
-           <div className="flex-shrink-0 z-20">
-             <img
-               src={h6_statue}// Replace with actual path
-               alt="Lady Justice"
-               className="w-full h-170 max-w-md md:max-w-lg lg:max-w-lg object-contain z-20"/>
-           </div>
-
-
-             {/* Right Text Section */}
-               <div className="text-center md:text-left max-w-2xl">
-                 <h5 className="text-sm tracking-widest text-[#a87d4a] font-semibold uppercase mb-3">
-                   The Importance of Due Diligence
-                 </h5>
-                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1b1c2c] leading-snug mb-6">
-                   Safeguard Your Investments <br className="hidden md:block" />
-                   with Trusted Due Diligence
-                 </h2>
-                 <p className="text-gray-700 text-base md:text-sm leading-relaxed mb-4">
-                   Due diligence is a vital process for any investor, providing a detailed understanding of a company’s financial health, business model, and compliance with legal and regulatory standards. By thoroughly evaluating financial statements, operational practices, and market reputation, investors can identify potential risks and opportunities, ensuring their decisions are well-informed. This process minimizes the likelihood of falling prey to scams or fraudulent schemes, which often involve exaggerated promises or opaque business structures.
-                 </p>
-                 <p className="text-gray-700 text-base md:text-sm leading-relaxed">
-                   Moreover, due diligence validates the authenticity of the company’s claims and ensures adherence to laws, protecting investors from liabilities associated with unethical practices. It also empowers investors to negotiate better terms and make confident, strategic decisions. In an increasingly complex financial landscape, due diligence is not just a precaution but a critical step in safeguarding investments and maximizing returns.
-                 </p>
-               </div>
-             </div>
-             </div>
-
-             <div
-  className="relative bg-cover bg-center bg-no-repeat text-white py-20 px-1 bottom-22 bg-[url('./assets/team_fancy.webp')]">
-  {/* Overlay */}
- <div
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundColor: "transparent",
-          backgroundImage: "linear-gradient(180deg, #243257E8 0%, #060B19E6 89%)",
-          opacity: 1,
-          transition: "background 0.3s, border-radius 0.3s, opacity 0.3s",
-        }}
-      ></div>
-<motion.img
-  src={about_hammer}
-  alt="Gavel"
-  className="absolute bottom-[-80px] right-410 w-56 sm:w-64 md:w-72 z-12"
-  initial={{ x: -300, opacity: 0 }}
-  animate={{
- x: [ -300, 0, -10, 10, 0 ], // shake starts only after x: 0
-    opacity: 1
-  }}
-  transition={{
-    x: {
-      duration: 2,
-      ease: "easeOut",
-      times: [0, 0.5, 0.6, 0.7, 0.75, 0.8, 0.85, 0.9, 1], // control when each keyframe happens
-    },
-    opacity: { duration: 1.2, ease: "easeOut" }
-  }}
-/>
-
-
-
-
-
-
-  {/* Content */}
-  <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 text-center lg:text-left relative z-10">
-    {/* Item 1 */}
-    <div className="space-y-4">
-      <img src="/icons/verify.svg" alt="Verify" className="mx-auto lg:mx-0 h-10" />
-      <h3 className="text-lg font-semibold text-white">Verify the Company</h3>
-      <p className="text-lg text-gray-300">
-        Check the business name, address, registration, and online presence.
-        Make sure the website is professional and contact details are legitimate.
+          {/* page first */}
+                                {isMobile ? (
+  // ✅ Mobile layout
+  <div className="w-full h-auto bg-[url('./assets/c1.webp')] bg-cover bg-center flex flex-col items-center px-6 py-20 relative">
+    <div className="w-full text-center text-white z-10">
+      <h1 className="text-4xl font-serif font-light mb-4">Due Diligence</h1>
+      <p className="text-[5vw] leading-relaxed uppercase">
+       "Our due diligence services empower you to make informed investment decisions by thoroughly researching opportunities—whether you choose to do it yourself or partner with us for expert guidance."
       </p>
     </div>
-
-    {/* Item 2 */}
-    <div className="space-y-4 border-l-1 h-65 pl-6 ">
-      <img src="/icons/red-flags.svg" alt="Red Flags" className="mx-auto lg:mx-0 h-10" />
-      <h3 className="text-lg font-semibold text-white">Watch for Red Flags</h3>
-      <p className="text-lg text-gray-300">
-        Stay cautious of urgent messages, unclear details, or unprofessional language,
-        as scammers often use these tactics to pressure you into making quick decisions.
-      </p>
+    <div className="mt-10 flex justify-center z-10">
+      <nav className="bg-white/30 backdrop-blur-sm px-4 py-3 flex items-center space-x-3">
+        <a href="#" className="text-white font-semibold">Home</a>
+        <a href="#" className="text-[#bb7742] font-medium">Due Diligence</a>
+      </nav>
     </div>
-
-    {/* Item 3 */}
-    <div className="space-y-4 border-l-1 h-65 pl-6">
-      <img src="/icons/examine.svg" alt="Examine" className="mx-auto lg:mx-0 h-10" />
-      <h3 className="text-lg font-semibold text-white">Examine the Offer</h3>
-      <p className="text-lg text-gray-300">
-        Be cautious of offers that seem too good to be true, as they are often
-        designed to deceive and exploit. Always verify the legitimacy before committing.
-      </p>
-    </div>
-
-    {/* Item 4 */}
-    <div className="space-y-4 border-l-1 h-65 pl-6">
-      <img src="/icons/review.svg" alt="Reviews" className="mx-auto lg:mx-0 h-10" />
-      <h3 className="text-lg font-semibold text-white">Read Reviews</h3>
-      <p className="text-lg text-gray-300">
-        Check reviews on reliable platforms and be cautious of suspiciously
-        positive or fake feedback that could indicate a scam.
-      </p>
-    </div>
-
-    {/* Item 5 */}
-    <div className="space-y-4 border-l-1 h-65 pl-6">
-      <img src="/icons/payment.svg" alt="Payments" className="mx-auto lg:mx-0 h-10" />
-      <h3 className="text-lg font-semibold  text-white">Secure Payments</h3>
-      <p className="text-lg text-gray-300">
-        Legitimate businesses accept secure payment methods like credit or
-        debit cards or PayPal, rather than cryptocurrencies or gift cards.
-      </p>
-    </div>
+    <div className="absolute inset-0 bg-black/30"></div>
   </div>
-</div>
+) : (
+  // ✅ Desktop layout
+  <div className="w-full h-auto bg-[url('./assets/c1.webp')] bg-cover bg-center flex flex-row items-start px-24 py-20 relative">
+    <div className="w-2/3 text-left text-white z-10">
+      <h1 className="text-6xl font-serif font-light mb-4">Due Diligence</h1>
+      <p className="text-lg leading-relaxed uppercase">
+       "Our due diligence services empower you to make informed investment decisions by thoroughly researching opportunities—whether you choose to do it yourself or partner with us for expert guidance."
+      </p>
+    </div>
+    <div className="w-1/3 mt-0 flex justify-end z-10">
+      <nav className="bg-white/30 backdrop-blur-sm px-6 py-3 flex items-center space-x-6">
+        <a href="#" className="text-white font-semibold">Home</a>
+        <a href="#" className="text-[#bb7742] font-medium">Due Diligence</a>
+      </nav>
+    </div>
+    <div className="absolute inset-0 bg-black/30"></div>
+  </div>
+)}
 
+           
+  {/* page second */}
+              {isMobile ? (
+        // 🌐 Mobile View
+        <div className="bg-white py-14 px-6 mt-6">
+          <div className="flex flex-col items-center gap-10">
+            <div className="z-20 w-full max-w-sm">
+              <img
+                src={h6_statue}
+                alt="Lady Justice"
+                className="w-full h-120 object-contain"
+              />
+            </div>
 
-  <div className="max-w-7xl mx-auto px-4 py-10 flex flex-col md:flex-row gap-10 text-[#10172C]">
-      {/* Sidebar */}
+            <div className="">
+              <h5 className="text-xs tracking-[0.7vw] text-[#a87d4a] font-semibold uppercase mb-2">
+                The Importance of Due Diligence
+              </h5>
+              <h2 className="text-4xl text-[#1b1c2c] tracking-wide leading-snug mb-4">
+                Safeguard Your Investments
+                with <br /> Trusted Due Diligence
+              </h2>
+              <p className="text-gray-700 text-lg leading-relaxed ">
+                Due diligence is a vital process for any investor, providing a detailed
+                understanding of a company’s financial health, business model, and
+                compliance with legal and regulatory standards. By thoroughly evaluating
+                financial statements, operational practices, and market reputation,
+                investors can identify potential risks and opportunities, ensuring their
+                decisions are well-informed.
+              </p>
+              <p className="text-gray-700 text-sm leading-relaxed">
+                Moreover, due diligence validates the authenticity of the company’s
+                claims and ensures adherence to laws, protecting investors from
+                liabilities associated with unethical practices. It also empowers
+                investors to negotiate better terms and make confident, strategic
+                decisions.
+              </p>
+            </div>
+          </div>
+        </div>
+      ) : (
+        // 🖥️ Desktop View
+        <div className="bg-white py-20 px-16 lg:px-24">
+          <div className="max-w-7xl mx-auto flex flex-row items-center gap-12">
+            <div className="flex-shrink-0 z-0">
+              <img
+                src={h6_statue}
+                alt="Lady Justice"
+                className="w-full h-170 mt-15 max-w-lg object-contain z-20"
+              />
+            </div>
+
+            <div className="text-left max-w-2xl">
+              <h5 className="text-sm tracking-widest text-[#a87d4a] font-semibold uppercase mb-3">
+                The Importance of Due Diligence
+              </h5>
+              <h2 className="text-4xl lg:text-5xl font-bold text-[#1b1c2c] leading-snug mb-6">
+                Safeguard Your Investments <br className="hidden md:block" />
+                with Trusted Due Diligence
+              </h2>
+              <p className="text-gray-700 text-sm leading-relaxed mb-4">
+                Due diligence is a vital process for any investor, providing a detailed
+                understanding of a company’s financial health, business model, and
+                compliance with legal and regulatory standards. By thoroughly evaluating
+                financial statements, operational practices, and market reputation,
+                investors can identify potential risks and opportunities, ensuring their
+                decisions are well-informed.
+              </p>
+              <p className="text-gray-700 text-sm leading-relaxed">
+                Moreover, due diligence validates the authenticity of the company’s
+                claims and ensures adherence to laws, protecting investors from
+                liabilities associated with unethical practices. It also empowers
+                investors to negotiate better terms and make confident, strategic
+                decisions.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+{/* page 3 */}
+ {isMobile ? (
+        // 📱 Mobile View
+        <div className="relative bg-cover bg-center bg-no-repeat mt-16 text-white py-16 px-4 bg-[url('./assets/team_fancy.webp')]">
+          {/* Gradient Overlay */}
+          <div
+            className="absolute inset-0 z-1"
+            style={{
+              backgroundColor: "transparent",
+              backgroundImage: "linear-gradient(180deg, #243257E8 0%, #060B19E6 89%)",
+              opacity: 1,
+              transition: "background 0.3s, border-radius 0.3s, opacity 0.3s",
+            }}
+          ></div>
+
+          {/* Animated Hammer */}
+          <motion.img
+            src={about_hammer}
+            alt="Gavel"
+            className="absolute bottom-[-60px] w-80 z-20 left-[-30px] top-270"
+            initial={{ x: -300, opacity: 0 }}
+            animate={{ x: [ -300, 0, -10, 10, 0 ], opacity: 1 }}
+            transition={{
+              x: { duration: 2, ease: "easeOut", times: [0, 0.5, 0.75, 0.9, 1] },
+              opacity: { duration: 1.2, ease: "easeOut" }
+            }}
+          />
+
+          {/* Content Cards in Column */}
+          <div className="relative  z-10 space-y-12">
+            {[
+              {
+                icon: "/icons/verify.svg",
+                title: "Verify the Company",
+              desc:" Check the business name, address, registration, and online presence. Make sure the website is professional and contact details are legitimate",
+              },
+              {
+                icon: "<MdCall />",
+                title: "Watch for Red Flags",
+                desc: "Stay cautious of urgent messages, unclear details, or unprofessional language, as scammers often use these tactics to pressure you into making quick decisions.",
+              },
+              {
+                icon: "/icons/examine.svg",
+                title: "Examine the Offer",
+                desc: "Be cautious of offers that seem too good to be true, as they are often designed to deceive and exploit. Always verify the legitimacy before committing.",
+              },
+              {
+                icon: "/icons/review.svg",
+                title: "Read Reviews",
+                desc: "Check reviews on reliable platforms and be cautious of suspiciously positive or fake feedback that could indicate a scam.",
+              },
+              {
+                icon: "/icons/payment.svg",
+                title: "Secure Payments",
+                desc: "Legitimate businesses accept secure payment methods like credit or debit cards or PayPal, rather than cryptocurrencies or gift cards.",
+              },
+            ].map((item, index) => (
+              <div key={index} className="text-center space-y-3 px-3">
+                <img src={item.icon} alt={item.title} className="mx-auto h-10" />
+                <h3 className="text-lg font-semibold">{item.title}</h3>
+                <p className="text-sm text-gray-300">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : (
+        // 🖥️ Desktop View
+        <div className="relative bg-cover h-[500px] bg-center bg-no-repeat mt-2 text-white py-20 px-1 bottom-22 bg-[url('./assets/team_fancy.webp')]">
+          {/* Gradient Overlay */}
+          <div
+            className="absolute inset-0 h-[500px] z-1"
+            style={{
+              backgroundColor: "transparent",
+              backgroundImage: "linear-gradient(180deg, #243257E8 0%, #060B19E6 89%)",
+              opacity: 1,
+              transition: "background 0.3s, border-radius 0.3s, opacity 0.3s",
+            }}
+          ></div>
+
+          {/* Animated Hammer */}
+          <motion.img
+            src={about_hammer}
+            alt="Gavel"
+            className="absolute bottom-[-80px] left-[-60px] w-100 z-12 top-100"
+            initial={{ x: -300, opacity: 0 }}
+            animate={{ x: [ -300, 0, -10, 10, 0 ], opacity: 1 }}
+            transition={{
+              x: { duration: 2, ease: "easeOut", times: [0, 0.5, 0.75, 0.9, 1] },
+              opacity: { duration: 1.2, ease: "easeOut" }
+            }}
+          />
+
+          {/* Grid Content */}
+          <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 text-center lg:text-left relative z-10">
+            {/* Card Items */}
+            {[
+              {
+                icon: "/icons/verify.svg",
+                title: "Verify the Company",
+                desc: "Check the business name, address, registration, and online presence. Make sure the website is professional and contact details are legitimate",
+              },
+              {
+                icon: "/icons/red-flags.svg",
+                title: "Watch for Red Flags",
+                desc: "Stay cautious of urgent messages, unclear details, or unprofessional language, as scammers often use these tactics to pressure you into making quick decisions.",
+              },
+              {
+                icon: "/icons/examine.svg",
+                title: "Examine the Offer",
+                desc: "Be cautious of offers that seem too good to be true, as they are often designed to deceive and exploit. Always verify the legitimacy before committing.",
+              },
+              {
+                icon: "/icons/review.svg",
+                title: "Read Reviews",
+                desc: "Check reviews on reliable platforms and be cautious of suspiciously positive or fake feedback that could indicate a scam.",
+              },
+              {
+                icon: "/icons/payment.svg",
+                title: "Secure Payments",
+                desc: "Legitimate businesses accept secure payment methods like credit or debit cards or PayPal, rather than cryptocurrencies or gift cards.",
+              },
+            ].map((item, index) => (
+              <div key={index} className="space-y-4 border-l-1 h-65 pl-6">
+                <img src={item.icon} alt={item.title} className="mx-auto lg:mx-0 h-10" />
+                <h3 className="text-lg font-semibold text-white">{item.title}</h3>
+                <p className="text-lg text-gray-300">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+{/* page 4 */}
+  {/* <div>
       <div className="w-full md:w-1/3 md:h-80 bg-white shadow mt-15">
         {menuItems.map((item) => (
           <button
@@ -376,7 +489,7 @@ useEffect(() => {
       </div>
 
            <div className="max-w-6xl mx-auto px-4 py-12 text-[#10172C]">
-      {/* Header */}
+      
       <a
         href="https://www.iosco.org/i-scan/"
         target="_blank"
@@ -396,7 +509,7 @@ useEffect(() => {
         </div>
       </a>
 
-      {/* Steps */}
+    
        <div className="flex flex-col md:flex-row items-center justify-between text-center mb-10 gap-10">
         {[
           {
@@ -445,14 +558,16 @@ operating without the necessary regulatory authorization, which could signal pot
       </p>
     </div>
 
-</div>
+</div> */}
 
 
+{/* page 5 */}
 
+{/* 
           <div className="sm:flex flex-col lg:flex-row md:flex-wrap sm:items-start">
      <section
   className="relative bg-gray-50 bg-center md:py-16 overflow-hidden w-500"
-  style={{ backgroundImage: `url(${quote})` }} // Ensure this image is in /public/assets
+  style={{ backgroundImage: `url(${quote})` }} 
 >
   <div className="max-w-1xl mx-auto sm:px-10 pb-2">
     <p className="text-sm tracking-widest text-gray-500 uppercase">
@@ -484,7 +599,7 @@ operating without the necessary regulatory authorization, which could signal pot
 </section>
 
         <div className="sm:max-w-5xl md:px-4 md:py-1">
-  {/* Left Side - Text Section */}
+
   <div className="sm:flex-2 md:mt-1 sm:py-28">
     <h2 className="text font-bold text-[#AD9779] mb-4 tracking-widest">
       CONTACT US
@@ -496,7 +611,7 @@ operating without the necessary regulatory authorization, which could signal pot
       At Aemilius Cupero, we offer a free, no-obligation consultation to help you understand your legal options. Whether<br></br> you’re dealing with a scam, need advice on a legal matter, 
       or have any other questions, our experienced team is<br></br> here to assist you. Contact us today to schedule your consultation and take the first step toward resolving your issue.
     </p>
- <div className="md:w-full flex sm:justify-end md:pr-1 sm:ml-[885px] "> {/* Flex container, aligns content to the right */}
+ <div className="md:w-full flex sm:justify-end md:pr-1 sm:ml-[885px] "> 
   <div className="w-[830px] -mt-80 relative sm:-mt-77 sm:w-full">
     <img
       src={law}
@@ -504,7 +619,7 @@ operating without the necessary regulatory authorization, which could signal pot
       className="w-full h-300 object-cover"
       
     />
-    {/* Floating puzzle icon positioned on the image edge */}
+ 
   <motion.img
     src={puzzle}
     alt="Floating Element"
@@ -529,7 +644,7 @@ operating without the necessary regulatory authorization, which could signal pot
   className="py-28 bg-[url('./assets/about_progress_bg.webp')] bg-cover bg-center bg-no-repeat bg-blend-multiply -mt-43"
 >
   <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 text-center">
-    {/* Stat 1 */}
+   
     <div>
       <h3 className="text-[50px] leading-[80px] tracking-[2.5px] font-bold text-white font-['Cormorant Infant']">
         <Counter end={63} suffix="M+" />
@@ -538,7 +653,7 @@ operating without the necessary regulatory authorization, which could signal pot
     </div>
 
 
-      {/* Stat 2 */}
+     
         <div>
           <h3 className="text-[50px] leading-[80px] tracking-[2.5px] font-bold text-white font-['Cormorant Infant']">
             <Counter end={830} suffix="+" />
@@ -546,7 +661,7 @@ operating without the necessary regulatory authorization, which could signal pot
           <p className="text-base font-['Nunito Sans sans-serif'] text-white mt-2">CASE COMPLETED</p>
         </div>
     
-        {/* Stat 3 */}
+       
         <div>
           <h3 className="text-[50px] leading-[80px] tracking-[2.5px] font-bold text-white font-['Cormorant Infant']">
             <Counter end={50} suffix="+" />
@@ -554,7 +669,7 @@ operating without the necessary regulatory authorization, which could signal pot
           <p className="text-base font-['Nunito Sans sans-serif'] text-white mt-2">WORLDWIDE AFFILIATES</p>
         </div>
 
-         {/* Stat 4 */}
+        
             <div>
               <h3 className="text-[50px] leading-[80px] tracking-[2.5px] font-bold text-white font-['Cormorant Infant']">
                 <Counter end={25} suffix="+" />
@@ -562,54 +677,195 @@ operating without the necessary regulatory authorization, which could signal pot
               <p className="text-base font-['Nunito Sans sans-serif'] text-white mt-2">EXPERIENCED LAWYERS</p>
             </div>
           </div>
+          </div> */}
+
+ {/* NEWS SECTION */}
+      {isMobile ? (
+        <section
+          className="relative bg-gray-50 py-10 px-4 h-[350px] overflow-hidden mt-40 bg-center"
+          style={{ backgroundImage: `url(${quote})` }}
+        >
+          <div className="max-w-lg mx-auto">
+            <p className="text-sm tracking-widest text-[#AD9779]  uppercase">
+              AEMILIUS CUPERO - AS SEEN IN THE NEWS
+            </p>
+            <h2 className="text-2xl font-semibold text-gray-900 mt-2">
+              THE TRUSTED CHOICE FOR YOUR NEEDS, ENDORSED BY LEADING NEWS PUBLICATIONS!
+            </h2>
+          </div>
+          <div className="mt-8">
+            <div className="flex gap-6 justify-start items-center">
+              <AnimatePresence>
+                {visibleLogos.map((logo, index) => (
+                  <motion.img
+                    key={index}
+                    src={logo}
+                    alt={`logo-${index}`}
+                    className="h-10 object-contain"
+                    initial={{ opacity: 0, x: 100 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -100 }}
+                  />
+                ))}
+              </AnimatePresence>
+            </div>
+          </div>
+        </section>
+        // desktop view
+      ) : (
+        <section
+          className="relative bg-gray-50 py-20 px-16  h-[280px] overflow-hidden bg-center mt-30"
+          style={{ backgroundImage: `url(${quote})` }}
+        >
+          <div className="max-w-3xl mx-auto sm:px-10 pb-2 ml-[-10px]">
+            <p className="text-sm tracking-widest text-[#AD9779] font-semibold uppercase">
+              AEMILIUS CUPERO - AS SEEN IN THE NEWS
+            </p>
+            <h2 className="text-2xl text-gray-900 tracking-widest whitespace-nowrap">THE TRUSTED CHOICE FOR YOUR NEEDS, ENDORSED BY LEADING NEWS PUBLICATIONS!
+              </h2>
+          </div>
+          <div className="mt-12 relative w-full">
+            <div className="flex justify-center gap-25 items-center grayscale hover:grayscale-0">
+              <AnimatePresence>
+                {visibleLogos.map((logo, index) => (
+                  <motion.img
+                    key={index}
+                    src={logo}
+                    alt={`logo-${index}`}
+                    className="h-12 object-contain"
+                    initial={{ opacity: 0, x: 100 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -100 }}
+                  />
+                ))}
+              </AnimatePresence>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* CONTACT + IMAGE SECTION */}
+      {isMobile ? (
+        <div className="px-4 py-12">
+          <h2 className="text-sm  text-[#AD9779] tracking-widest">CONTACT US</h2>
+          <h1 className="text-3xl text-gray-900 font-semibold my-4 tracking-widest">
+           Speak with an Expert Today – Free Legal Consultation with No Commitment!
+          </h1>
+          <p className="text-sm text-gray-600 leading-6 mt-10">
+            At Aemilius Cupero, we offer a free, no-obligation consultation to help you understand your legal options. Whether you’re dealing with a scam, need advice on a legal matter, or have any other questions, our experienced team is here to assist you. Contact us today to schedule your consultation and take the first step toward resolving your issue.
+          </p>
+
+          <div className="mt-8 relative">
+            <img src={law} alt="Consultation" className="w-[500px] h-[500px] object-cover" />
+            <motion.img
+              src={puzzle}
+              alt="Floating"
+              className="absolute w-12 bottom-10 right-6"
+              initial={{ y: -100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 1.5 }}
+              whileHover={{
+                rotate: [0, 5, -5, 0],
+                transition: { duration: 1 },
+              }}
+            />
+          </div>
+        </div>
+      ) : (
+        <div className="flex justify-between items-start px-24 py-28">
+          <div className="max-w-xl">
+            <h2 className="text-sm text-[#AD9779] tracking-widest">CONTACT US</h2>
+            <h1 className="text-4xl font-semibold tracking-widest text-gray-900 my-4">
+             Speak with an Expert Today – Free Legal Consultation with No Commitment!
+            </h1>
+            <p className="text-sm text-gray-600 leading-6">
+             At Aemilius Cupero, we offer a free, no-obligation consultation to help you understand your legal options. Whether you’re dealing with a scam, need advice on a legal matter, or have any other questions, our experienced team is here to assist you. Contact us today to schedule your consultation and take the first step toward resolving your issue.
+            </p>
           </div>
 
-                   <div >
-                          <div className="bg-[#1a243f] sm:flex pb-20 mt-30">
-                            <div className="sm:w-200 sm:ml-95 pt-25 ml-5 mr-5">
-                                  <img src={logo} alt=""  className="bg-white p-3 mb-5"/>
-                            <p className="text-white pb-4">
-                              Aemilius Cupero LLC is a law firm exclusively focused on helping clients recover lost funds. We do not offer services related to online investments, including cryptocurrencies, forex, or binary options. 
-                            </p>
-                            <p className="text-white pb-4">
-                              Unfortunately, we have become aware of fraudulent individuals who falsely claim to be employees of Aemilius Cupero in an attempt to exploit our name for financial gain. These scammers use deceptive tactics to request sensitive information such as credit card numbers, account details, and other personal data. We urge you to contact us directly before engaging in any financial transactions or sharing personal information. 
-                            </p>
-                            <p className="text-white">
-                              Please note that Aemilius Cupero is not liable for any consequences resulting from communication initiated through unofficial domains. Always verify that you are using our official website (e.g., www.aemilius-cupero.com or .net) for all interactions with us.
-                            </p>
-                            </div>
-                
-                              <div className="w-70 sm:w-100 sm:flex">
-                                <div className=" ml-5 mr-5 sm:pt-24">
-                                  <h1 className="text-[30px] sm:text-[22px] font-serif text-white mt-10">WHERE TO FIND US</h1>
-                                  <hr className="mt-5 mb-7 text-[#AD9779]"/>
-                                  <div className="flex mb-2">
-                                       <div className="border-1 border-white bg-green-400 hover:border-transparent w-19 h-20"><IoLogoMedium className="text-white text-[45px] mt-4 ml-4"/></div>
-                                      <div className="border-1 border-white bg-blue-500 hover:border-transparent w-19 h-20"><SiLinkedin className="text-white text-[45px] mt-4 ml-4"/></div>
+          <div className="relative w-[800px] -mt-20">
+            <img src={law} alt="Consultation" className="w-full h-300 object-cover ml-30" />
+            <motion.img
+              src={puzzle}
+              alt="Floating"
+              className="absolute w-14 bottom-28 right-10"
+              initial={{ y: -100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 1.5 }}
+              whileHover={{
+                rotate: [0, 5, -5, 0],
+                transition: { duration: 1 },
+              }}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* COUNTERS SECTION */}
+      <div
+        className={`py-20 bg-[url('./assets/about_progress_bg.webp')] bg-cover bg-center h-[400px] top-20 bg-no-repeat bg-blend-multiply ${isMobile ? "px-4" : "px-0 -mt-20"}`}
+      >
+        <div className={`mx-auto max-w-6xl grid gap-10 ${isMobile ? "grid-cols-1 text-center" : "grid-cols-4 text-center"}`}>
+          {[
+            { count: 63, suffix: "M+", label: "RECOVERED TILL TODAY" },
+            { count: 830, suffix: "+", label: "CASE COMPLETED" },
+            { count: 50, suffix: "+", label: "WORLDWIDE AFFILIATES" },
+            { count: 25, suffix: "+", label: "EXPERIENCED LAWYERS" },
+          ].map((item, i) => (
+            <div key={i}>
+              <h3 className="text-[40px] lg:text-[50px] font-bold text-white font-['Cormorant Infant'] tracking-[2.5px]">
+                <Counter end={item.count} suffix={item.suffix} />
+              </h3>
+              <p className="text-base text-white mt-2 font-['Nunito Sans sans-serif']">{item.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+{/* footer */}
+                   <div>
+                                      <div className="bg-[#1a243f] sm:flex pb-20 mt-30">
+                                          <div className="sm:w-200 sm:ml-95 pt-25 ml-5 mr-5">
+                                              <img src={logo} alt="" className="bg-white p-3 mb-5" />
+                                              <p className="text-white pb-4">
+                                                  Aemilius Cupero LLC is a law firm exclusively focused on helping clients recover lost funds. We do not offer services related to online investments, including cryptocurrencies, forex, or binary options.
+                                              </p>
+                                              <p className="text-white pb-4">
+                                                  Unfortunately, we have become aware of fraudulent individuals who falsely claim to be employees of Aemilius Cupero in an attempt to exploit our name for financial gain. These scammers use deceptive tactics to request sensitive information such as credit card numbers, account details, and other personal data. We urge you to contact us directly before engaging in any financial transactions or sharing personal information.
+                                              </p>
+                                              <p className="text-white">
+                                                  Please note that Aemilius Cupero is not liable for any consequences resulting from communication initiated through unofficial domains. Always verify that you are using our official website (e.g., www.aemilius-cupero.com or .net) for all interactions with us.
+                                              </p>
+                                          </div>
+                  
+                                          <div className="w-70 sm:w-100 sm:flex">
+                                              <div className="ml-5 mr-5 sm:pt-24">
+                                                  <h1 className="text-[30px] sm:text-[22px] font-serif text-white mt-10">WHERE TO FIND US</h1>
+                                                  <hr className="mt-5 mb-7 text-[#AD9779]" />
+                                                  <div className="flex mb-2">
+                                                      <div className="border-1 border-white bg-green-400 hover:border-transparent w-19 h-20"><IoLogoMedium className="text-white text-[45px] mt-4 ml-4" /></div>
+                                                      <div className="border-1 border-white bg-blue-500 hover:border-transparent w-19 h-20"><SiLinkedin className="text-white text-[45px] mt-4 ml-4" /></div>
+                                                  </div>
+                                                  <div className="flex mb-2">
+                                                      <div className="border-1 border-white bg-[#cd201f] hover:border-transparent w-19 h-20"><IoLogoYoutube className="text-white text-[45px] mt-4 ml-4" /></div>
+                                                      <div className="border-1 border-white bg-red-700 hover:border-transparent w-19 h-20"><FaPinterest className="text-white text-[45px] mt-4 ml-4" /></div>
+                                                  </div>
+                                              </div>
+                                              <div className="ml-5 mr-5 sm:pt-24 ">
+                                                  <h1 className="text-[30px] sm:text-[22px] font-serif text-white mt-10">SAFE AND SECURE</h1>
+                                                  <hr className="mt-5 mb-7 text-[#AD9779]" />
+                                                  <div>
+                                                      <img src={footer1} alt="" className="mb-5" />
+                                                      <img src={footer2} alt="" className="mb-5" />
+                                                      <img src={footer3} alt="" className="" />
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div className="bg-[#11192e] w-full">
+                                          <p className="pt-5 pb-4 text-white sm:ml-95 ml-5">Copyright 2024 Aemilius Cupero LLC | All Rights Reserved</p>
+                                      </div>
                                   </div>
-                                 <div className="flex mb-2">
-                                   <div className="border-1 border-white bg-[#cd201f] hover:border-transparent w-19 h-20"><IoLogoYoutube className="text-white text-[45px] mt-4 ml-4"/></div>
-                                   <div className="border-1 border-white bg-red-700 hover:border-transparent w-19 h-20"><FaPinterest className="text-white text-[45px] mt-4 ml-4"/></div>
-                                 </div>
-                                </div>
-                                <div className="ml-5 mr-5 sm:pt-24 ">
-                                  <h1 className="text-[30px] sm:text-[22px] font-serif text-white mt-10">SAFE AND SECURE</h1>
-                                   <hr className="mt-5 mb-7 text-[#AD9779]"/>
-                                   <div>
-                                    <img src={footer1} alt=""  className="mb-5"/>
-                                    <img src={footer2} alt="" className="mb-5"/>
-                                    <img src={footer3} alt="" className=""/>
-                                   </div>
-                                </div>
-                          </div>
-                          </div>
-                         </div>
-                              <div className="bg-[#11192e] w-full">
-                                 <p className="pt-5 pb-4 text-white sm:ml-95 ml-5">Copyright 2024 Aemilius Cupero LLC | All Rights Reserved</p>
-                             </div>
-                
-
-
 
          </>
     );
